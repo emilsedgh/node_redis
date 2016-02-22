@@ -150,6 +150,7 @@ RedisClient.prototype.create_stream = function () {
     this.stream.on('data', function (buffer_from_socket) {
         // The buffer_from_socket.toString() has a significant impact on big chunks and therefor this should only be used if necessary
         debug('Net read ' + self.address + ' id ' + self.connection_id); // + ': ' + buffer_from_socket.toString());
+        console.log('Net Read', buffer_from_socket.toString());
         self.reply_parser.execute(buffer_from_socket);
     });
 
