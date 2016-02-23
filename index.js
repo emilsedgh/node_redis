@@ -154,23 +154,28 @@ RedisClient.prototype.create_stream = function () {
     });
 
     this.stream.on('error', function (err) {
+      console.log('Stream error', err);
         self.on_error(err);
     });
 
     /* istanbul ignore next: travis does not work with stunnel atm. Therefor the tls tests are skipped on travis */
     this.stream.on('clientError', function (err) {
+      console.log('Client Error', err);
         self.on_error(err);
     });
 
     this.stream.once('close', function () {
+      console.log('Connection closed');
         self.connection_gone('close');
     });
 
     this.stream.once('end', function () {
+      console.log('Stream end');
         self.connection_gone('end');
     });
 
     this.stream.on('drain', function () {
+      console.log('Stream drain');
         self.drain();
     });
 
@@ -512,6 +517,7 @@ RedisClient.prototype.connection_gone = function (why) {
 };
 
 RedisClient.prototype.return_error = function (err) {
+  console.log('Returning error', err);
     var command_obj = this.command_queue.shift(),
         queue_len = this.command_queue.length;
 
@@ -548,6 +554,7 @@ RedisClient.prototype.emit_idle = function (queue_len) {
 };
 
 RedisClient.prototype.return_reply = function (reply) {
+  console.log('Returning reply', reply);
     var command_obj, len, type, timestamp, argindex, args, queue_len;
 
     // If the 'reply' here is actually a message received asynchronously due to a
