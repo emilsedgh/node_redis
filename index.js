@@ -517,7 +517,6 @@ RedisClient.prototype.connection_gone = function (why) {
 };
 
 RedisClient.prototype.return_error = function (err) {
-  console.log('Returning error', err);
     var command_obj = this.command_queue.shift(),
         queue_len = this.command_queue.length;
 
