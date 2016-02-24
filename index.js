@@ -553,7 +553,6 @@ RedisClient.prototype.emit_idle = function (queue_len) {
 };
 
 RedisClient.prototype.return_reply = function (reply) {
-  console.log('Returning reply', reply);
     var command_obj, len, type, timestamp, argindex, args, queue_len;
 
     // If the 'reply' here is actually a message received asynchronously due to a
