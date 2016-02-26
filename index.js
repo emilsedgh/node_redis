@@ -547,6 +547,7 @@ RedisClient.prototype.drain = function () {
 RedisClient.prototype.emit_idle = function (queue_len) {
     if (this.pub_sub_mode === false && queue_len === 0) {
         // Free the queue capacity memory by using a new queue
+        debug('Idle');
         this.command_queue = new Queue();
         this.emit('idle');
     }
