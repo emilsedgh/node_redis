@@ -128,10 +128,10 @@ RedisClient.prototype.create_stream = function () {
 
     /* istanbul ignore if: travis does not work with stunnel atm. Therefor the tls tests are skipped on travis */
     if (this.options.tls) {
-	    this.stream = tls.connect(this.connection_options);
+        this.stream = tls.connect(this.connection_options);
     } else {
-	    this.stream = net.createConnection(this.connection_options);
-	}
+        this.stream = net.createConnection(this.connection_options);
+    }
 
     if (this.options.connect_timeout) {
         this.stream.setTimeout(this.connect_timeout, function () {
@@ -154,28 +154,28 @@ RedisClient.prototype.create_stream = function () {
     });
 
     this.stream.on('error', function (err) {
-      console.log('Stream error', err);
+        debug('Error', err)
         self.on_error(err);
     });
 
     /* istanbul ignore next: travis does not work with stunnel atm. Therefor the tls tests are skipped on travis */
     this.stream.on('clientError', function (err) {
-      console.log('Client Error', err);
+      debug('ClientError', err)
         self.on_error(err);
     });
 
     this.stream.once('close', function () {
-      console.log('Connection closed');
+      debug('Close', err)
         self.connection_gone('close');
     });
 
     this.stream.once('end', function () {
-      console.log('Stream end');
+      debug('End', err)
         self.connection_gone('end');
     });
 
     this.stream.on('drain', function () {
-      console.log('Stream drain');
+      debug('Drain', err)
         self.drain();
     });
 
