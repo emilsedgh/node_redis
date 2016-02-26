@@ -750,9 +750,9 @@ RedisClient.prototype.send_command = function (command, args, callback) {
             command_str += '$' + Buffer.byteLength(arg) + '\r\n' + arg + '\r\n';
         }
         var f = this.write(command_str, () => {
-          debug('Send Completed' + this.address + ' id ' + this.connection_id + ': ' + command_str, f);
+          debug('Send Completed' + this.address + ' id ' + this.connection_id + ': ' + command_str);
         });
-        debug('Send ' + this.address + ' id ' + this.connection_id + ': ' + command_str, f);
+        debug('Send ' + f + this.address + ' id ' + this.connection_id + ': ' + command_str);
     } else {
         debug('Send command (' + command_str + ') has Buffer arguments');
         this.write(command_str);
