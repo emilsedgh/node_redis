@@ -16,7 +16,7 @@ var default_host = '127.0.0.1';
 
 function noop () {}
 function clone (obj) { return JSON.parse(JSON.stringify(obj || {})); }
-function debug (msg) { if (exports.debug_mode) { console.error(msg); } }
+function debug (msg) { if (exports.debug_mode) { console.error(process.domain.url, msg); } }
 
 function handle_detect_buffers_reply (reply, command, buffer_args) {
     if (buffer_args === false) {
